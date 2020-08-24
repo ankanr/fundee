@@ -1,0 +1,26 @@
+{
+  "name": "fundee-api",
+  "version": "1.0.0",
+  "description": "The backend for Fundee",
+  "main": "index.js",
+  "dependencies": {
+    "express": "^4.17.1",
+    "mongoose": "^5.10.0",
+    "nodemon": "^2.0.4"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "start": "node src/index.js",
+    "dev": "nodemon -e js,json,css,hbs src/index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ankanr/fundee.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/ankanr/fundee/issues"
+  },
+  "homepage": "https://github.com/ankanr/fundee#readme"
+}
