@@ -1,11 +1,12 @@
 const mongoose = require('mongoose');
 const validator = require('validator');
+const jwt = require('jsonwebtoken');
 
 const userSchema = mongoose.Schema({
   username: {
     type: String,
     required: [true, 'Username is required'],
-    unique: [true, 'Username is already taken'],
+    unique: true,
     trim: true,
   },
   password: {
@@ -42,7 +43,23 @@ const userSchema = mongoose.Schema({
     //   }
     // },
   },
+  tokens: [
+    {
+      token: {
+        type: String,
+        required: true,
+      },
+    },
+  ],
 });
+
+userSchema.methods.generateAuthToken = async function () {
+  const user = this;
+  const token = jwt.sign({ _id: user._id.toString() }, 'fundeeapp');
+  user.tokens = user.tokens.concat({ token });
+  await user.save();
+  return token;
+};
 
 const User = mongoose.model('User', userSchema);
 
