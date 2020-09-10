@@ -6,28 +6,28 @@ const userSchema = mongoose.Schema({
   username: {
     type: String,
     required: [true, 'Username is required'],
-    unique: true,
+    unique: [true, 'Username already taken'],
     trim: true,
   },
   password: {
     type: String,
     required: [true, 'Password is required'],
     minlength: [6, 'Password needs to minimum 6 characters'],
-    // validate(value) {
-    //   if (value.includes('password')) {
-    //     throw new Error('Password should be stronger!');
-    //   }
-    // },
+    validate(value) {
+      if (value.includes('password')) {
+        throw new Error('Password should be stronger!');
+      }
+    },
   },
   email: {
     type: String,
     required: [true, 'Email is required'],
     unique: [true, 'Email is already taken'],
-    // validate(value) {
-    //   if (!validator.isEmail(value)) {
-    //     throw new Error('Email is invalid');
-    //   }
-    // },
+    validate(value) {
+      if (!validator.isEmail(value)) {
+        throw new Error('Email is invalid');
+      }
+    },
   },
   age: {
     type: Number,
@@ -37,11 +37,11 @@ const userSchema = mongoose.Schema({
   },
   phn: {
     type: String,
-    // validate(value) {
-    //   if (!validator.isMobilePhone(value)) {
-    //     throw new Error('Enter valid mobile number');
-    //   }
-    // },
+    validate(value) {
+      if (!validator.isMobilePhone(value)) {
+        throw new Error('Enter valid mobile number');
+      }
+    },
   },
   tokens: [
     {
