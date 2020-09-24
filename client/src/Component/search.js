@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import './search.css';
+import './Search.css';
 
 class SearchBox extends Component {
   constructor(props) {
@@ -37,28 +37,31 @@ class SearchBox extends Component {
 
   render() {
     return (
-      <div>
-        <h1 className="heading"> Fundee!!</h1>
-        <input
-          type="text"
-          value={this.state.search}
-          onChange={this.enteredValue}
-        />
+      <>
+        <nav>
+          <h1 className="heading">Fundee</h1>
+        </nav>
         <br />
-        <br />
-        <button onClick={this.searchValue}>Search</button>
-        <br />
-        <br />
-        {this.state.loading ? (
-          <div>Loading...</div>
-        ) : (
-          <div>
-            Name : {this.state.name}
-            <br />
-            Location : {this.state.location}
-          </div>
-        )}
-      </div>
+        <div className="input">
+          <input
+            type="text"
+            value={this.state.search}
+            onChange={this.enteredValue}
+          />
+          <button onClick={this.searchValue}>Search</button>
+          <br />
+          <br />
+          {this.state.loading ? (
+            <div>Loading...</div>
+          ) : (
+            <div>
+              Name : {this.state.name}
+              <br />
+              Location : {this.state.location}
+            </div>
+          )}
+        </div>
+      </>
     );
   }
 }
