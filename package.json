@@ -13,7 +13,9 @@
   "devDependencies": {},
   "scripts": {
     "start": "node src/index.js",
-    "dev": "nodemon -e js,json,css,hbs src/index.js"
+    "client": "npm start --prefix client",
+    "nodemon": "nodemon -e js,json,css,hbs src/index.js",
+    "dev": "concurrently \"npm run nodemon\" \"npm run client\""
   },
   "repository": {
     "type": "git",
