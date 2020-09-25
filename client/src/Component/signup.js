@@ -1,10 +1,10 @@
 import React, { Component } from 'react';
-import './signup.css';
+import './Signup.css';
 
 class Signup extends Component {
   constructor(props) {
     super(props);
-    this.state = { Username: ' ', Password: '', email: ' ', cno: ' ' };
+    this.state = { username: ' ', password: '', email: ' ', cno: ' ' };
   }
   modifychange = ({ target }) => {
     this.setState({ [target.name]: target.value });
@@ -13,51 +13,59 @@ class Signup extends Component {
   render() {
     return (
       <React.Fragment>
-        <h1 className="heading"> Fundee!!</h1>
-        <form className="form">
-          <label htmlFor="Username">Username :</label>
-          <input
-            className="username"
-            type="text"
-            name="Username"
-            value={this.state.Username}
-            onChange={this.modifychange}
-          />
-          <br />
-          <br />
-          <label htmlFor="Password">Password :</label>
-          <input
-            className="Password"
-            type="password"
-            name="Password"
-            value={this.state.Password}
-            onChange={this.modifychange}
-          />
-          <br />
-          <br />
-          <label htmlFor="email">E-mail:</label>
-          <input
-            className="email"
-            type="email"
-            name="email"
-            value={this.state.email}
-            onChange={this.modifychange}
-          />
-          <br />
-          <br />
-          <label htmlFor="cno"> Contact No : </label>
-          <input
-            className="cno"
-            type="text"
-            name="cno"
-            value={this.state.cno}
-            onChange={this.modifychange}
-          />
-          <br />
-          <br />
+        <nav className="heading">Fundee</nav>
+        <div className="form">
+          <form>
+            <label htmlFor="Username">Username :</label>
+            <input
+              className="username"
+              type="text"
+              name="Username"
+              placeholder="Enter you username"
+              value={this.state.Username}
+              onChange={this.modifychange}
+            />
+            <br />
+            <br />
+            <label htmlFor="password">Password :</label>
+            <input
+              className="password"
+              type="password"
+              name="password"
+              placeholder="Enter you password"
+              value={this.state.password}
+              onChange={this.modifychange}
+            />
+            <br />
+            <br />
+            <label htmlFor="email">E-mail:</label>
+            <input
+              className="email"
+              type="email"
+              name="email"
+              placeholder="Enter you email"
+              value={this.state.email}
+              onChange={this.modifychange}
+            />
+            <br />
+            <br />
+            <label htmlFor="cno">Contact No : </label>
+            <input
+              className="cno"
+              type="number"
+              name="cno"
+              placeholder="Enter you mobile number"
+              value={this.state.cno}
+              onChange={this.modifychange}
+            />
+            <br />
+            <br />
 
-          <input className="submit" type="submit" value="Submit" />
-        </form>
+            <button type="submit" value="submit">
+              Submit
+            </button>
+          </form>
+        </div>
       </React.Fragment>
     );
   }

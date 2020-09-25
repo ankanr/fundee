@@ -56,32 +56,3 @@ button {
 	font-size: 15px;
 	font-weight: bold;
 }
-
-/* .Password{
-	background-color: #c4bec0;
-	margin-left:20px;
-}
-
-.username{
-	background-color: #c4bec0;
-	margin-left:20px;
-}
-.email{
-	background-color: #c4bec0;
-	margin-left:45px;
-}
-.cno{
-	background-color: #c4bec0;
-	margin-left:20px;
-}
-.heading{
-	margin-top: 30px;
-	text-align: center;
-	color: red;
-	font-size: 100px;
-	font-style: italic;
-} */
-.submit{
-	background-color: #709094;
-	margin-left: 100px;
-}
