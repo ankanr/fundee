@@ -1,8 +1,10 @@
 const mongoose = require('mongoose');
 const validator = require('validator');
 const jwt = require('jsonwebtoken');
+const bcrypt = require('bcrypt');
+const saltRounds = 10;
 
-const userSchema = mongoose.Schema({
+const userSchema = new mongoose.Schema({
   username: {
     type: String,
     required: [true, 'Username is required'],
@@ -32,7 +34,8 @@ const userSchema = mongoose.Schema({
   age: {
     type: Number,
     min: [13, 'You must be minimum 13 to be able to register'],
-    required: [true, 'Age is required'],
+    default: 18,
+    // required: [true, 'Age is required'],
     max: [115, 'Too old to be alive'],
   },
   phn: {
@@ -53,13 +56,46 @@ const userSchema = mongoose.Schema({
   ],
 });
 
-userSchema.methods.generateAuthToken = async function () {
+// userSchema.methods.toJSON = function () {
+//   const user = this;
+//   const userObject = user.toObject();
+
+//   delete userObject.password;
+//   delete userObject.tokens;
+
+//   return userObject;
+// };
+
+userSchema.methods.generateAuthToken = function () {
   const user = this;
   const token = jwt.sign({ _id: user._id.toString() }, 'fundeeapp');
   user.tokens = user.tokens.concat({ token });
-  await user.save();
-  return token;
+  user.save();
 };
+
+userSchema.statics.findByCredentials = async (username, password) => {
+  const user = await User.findOne({ username });
+
+  if (!user) {
+    throw 'No user found';
+  }
+
+  const isMatch = await bcrypt.compare(password, user.password.toString());
+  console.log(isMatch);
+
+  if (!isMatch) {
+    throw 'Unable to login';
+  }
+
+  return user;
+};
+
+userSchema.pre('save', async function (next) {
+  if (this.isModified('password')) {
+    this.password = await bcrypt.hash(this.password, saltRounds);
+  }
+  next();
+});
 
 const User = mongoose.model('User', userSchema);
 

@@ -1,29 +1,44 @@
 import React, { Component } from 'react';
+import axios from 'axios';
 import './Signup.css';
 
 class Signup extends Component {
   constructor(props) {
     super(props);
-    this.state = { username: ' ', password: '', email: ' ', cno: ' ' };
+    this.state = {
+      username: '',
+      password: '',
+      email: '',
+      cno: '',
+    };
   }
-  modifychange = ({ target }) => {
-    this.setState({ [target.name]: target.value });
+  changeHandler = (e) => {
+    this.setState({ [e.target.name]: e.target.value });
+  };
+
+  submitHandler = (e) => {
+    e.preventDefault();
+    axios
+      .post('http://localhost:3000/user/register', this.state)
+      .then((response) => console.log(response))
+      .catch((err) => console.log(err));
   };
 
   render() {
+    const { username, password, email, cno } = this.state;
     return (
       <React.Fragment>
         <nav className="heading">Fundee</nav>
         <div className="form">
-          <form>
-            <label htmlFor="Username">Username :</label>
+          <form onSubmit={this.submitHandler}>
+            <label htmlFor="name">Username :</label>
             <input
-              className="username"
+              className="name"
               type="text"
-              name="Username"
-              placeholder="Enter you username"
-              value={this.state.Username}
-              onChange={this.modifychange}
+              name="username"
+              placeholder="Enter you name"
+              value={username}
+              onChange={this.changeHandler}
             />
             <br />
             <br />
@@ -33,8 +48,8 @@ class Signup extends Component {
               type="password"
               name="password"
               placeholder="Enter you password"
-              value={this.state.password}
-              onChange={this.modifychange}
+              value={password}
+              onChange={this.changeHandler}
             />
             <br />
             <br />
@@ -44,8 +59,8 @@ class Signup extends Component {
               type="email"
               name="email"
               placeholder="Enter you email"
-              value={this.state.email}
-              onChange={this.modifychange}
+              value={email}
+              onChange={this.changeHandler}
             />
             <br />
             <br />
@@ -55,8 +70,8 @@ class Signup extends Component {
               type="number"
               name="cno"
               placeholder="Enter you mobile number"
-              value={this.state.cno}
-              onChange={this.modifychange}
+              value={cno}
+              onChange={this.changeHandler}
             />
             <br />
             <br />
