@@ -1,19 +1,19 @@
-const express = require('express');
-const User = require('../models/user');
+const express = require("express");
+const User = require("../models/user");
 const router = new express.Router();
-const auth = require('../middleware/auth.js');
+const auth = require("../middleware/auth.js");
 
-router.post('/register', async (req, res) => {
+router.post("/register", async (req, res) => {
   const user = new User(req.body);
   try {
-    user.generateAuthToken();
-    res.send(user);
+    const token = user.generateAuthToken();
+    res.send({ user, token });
   } catch (e) {
     res.status(500).send(e);
   }
 });
 
-router.post('/login', async (req, res) => {
+router.post("/login", async (req, res) => {
   try {
     const user = await User.findByCredentials(
       req.body.username,
@@ -21,21 +21,19 @@ router.post('/login', async (req, res) => {
     );
 
     const token = user.generateAuthToken();
-    localStorage.setItem('Auth', token);
     res.send({ user, token });
   } catch (e) {
     res.send(e);
   }
 });
 
-router.post('/logout', auth, async (req, res) => {
+router.post("/logout", auth, async (req, res) => {
   try {
-    req.user.tokens = req.user.tokens.filter((token) => {
-      return token.token !== req.token;
-    });
+    req.user.token = "";
     await req.user.save();
-    res.send();
+    res.send("Logged Out!");
   } catch (e) {
+    console.log(e);
     res.status(500).send(e);
   }
 });
