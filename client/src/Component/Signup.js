@@ -1,16 +1,16 @@
-import React, { Component } from "react";
-import axios from "axios";
-import "./Signup.css";
+import React, { Component } from 'react';
+import axios from 'axios';
+import './Signup.css';
 
 class Signup extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      username: "",
-      password: "",
-      email: "",
-      cno: "",
-      message: "",
+      username: '',
+      password: '',
+      email: '',
+      cno: '',
+      message: '',
     };
   }
   changeHandler = (e) => {
@@ -18,20 +18,22 @@ class Signup extends Component {
   };
 
   submitHandler = (e) => {
-    e.preventDefault();
     axios
-      .post("http://localhost:3000/user/register", this.state)
+      .post('http://localhost:3000/user/register', this.state)
       .then((response) => {
-        this.setState({ message: "Signed Up!" });
+        this.setState({ message: 'Signed Up!' });
       })
       .catch((err) => console.log(err));
+
+    setTimeout(() => {
+      window.location.reload();
+    }, 2500);
   };
 
   render() {
     const { username, password, email, cno, message } = this.state;
     return (
       <React.Fragment>
-        <nav className="heading">Fundee</nav>
         <div className="res">{message}</div>
         <div className="form">
           <form onSubmit={this.submitHandler}>

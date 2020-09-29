@@ -10,3 +10,40 @@ body {
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New', monospace;
 }
+
+.heading {
+	font-family: 'Pacifico', cursive;
+    color: #000;
+    background-color: #FFD100;
+    text-align: left;
+    padding: 5px;
+    font-size: 2rem;
+    text-shadow: 1px 1px #333;
+}
+
+.title {
+    font-family: 'Pacifico', cursive;
+    font-size: 2rem;
+    color: #fff;
+}
+
+nav {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+ul {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+ul li {
+    list-style: none;
+}
+
+a {
+  text-decoration: none;
+  color: #000;
+}

@@ -1,11 +1,11 @@
-import React, { Component } from "react";
-import axios from "axios";
-import "./Login.css";
+import React, { Component } from 'react';
+import axios from 'axios';
+import './Login.css';
 
 class LoginForm extends Component {
   constructor(props) {
     super(props);
-    this.state = { username: "", password: "", message: "" };
+    this.state = { username: '', password: '', message: '' };
   }
 
   changeHandler = (e) => {
@@ -15,27 +15,30 @@ class LoginForm extends Component {
   submitHandler = async (e) => {
     e.preventDefault();
     await axios
-      .post("http://localhost:3000/user/login", this.state)
+      .post('http://localhost:3000/user/login', this.state)
       .then((response) => {
         if (
-          response.data === "No user found" ||
-          response.data === "Unable to login"
+          response.data === 'No user found' ||
+          response.data === 'Unable to login'
         ) {
           this.setState({ message: response.data });
         } else {
-          this.setState({ message: "Logged in!" });
-          localStorage.setItem("token", response.data.token);
-          console.log(localStorage.getItem("token"));
+          this.setState({ message: 'Logged in!' });
+          localStorage.setItem('token', response.data.token);
+          localStorage.setItem('name', response.data.user.username);
+          window.location.reload();
         }
       })
       .catch((err) => console.log(err));
+    setTimeout(() => {
+      window.location.reload();
+    }, 2500);
   };
 
   render() {
     const { username, password, message } = this.state;
     return (
       <React.Fragment>
-        <nav className="heading">Fundee</nav>
         <div className="res">{message}</div>
         <div className="form">
           <form onSubmit={this.submitHandler}>
