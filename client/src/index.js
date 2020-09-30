@@ -3,7 +3,6 @@ import ReactDOM from 'react-dom';
 import { Route, BrowserRouter as Router, Link, Switch } from 'react-router-dom';
 import './index.css';
 
-import SearchBox from './Component/Search';
 import Signup from './Component/Signup';
 import Login from './Component/Login';
 import Logout from './Component/Logout';

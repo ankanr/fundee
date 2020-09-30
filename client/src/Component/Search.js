@@ -1,3 +1,4 @@
+import axios from 'axios';
 import React, { Component } from 'react';
 import './Search.css';
 
@@ -5,60 +6,74 @@ class SearchBox extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      search: '',
-      val: '',
       loading: true,
-      name: null,
-      location: null,
+      name: '',
+      location: '',
+      query: '',
+      error: '',
     };
   }
 
-  enteredValue = ({ target }) => {
+  changeHandler = (e) => {
     this.setState({
-      search: target.value,
+      [e.target.name]: e.target.value,
     });
   };
 
-  searchValue = () => {
-    this.setState({
-      val: this.state.search,
-      loading: false,
+  submitHandler = async (e) => {
+    e.preventDefault();
+    await axios.get('http://localhost:3000/ngo/data').then((response) => {
+      if (
+        this.state.query.toLowerCase() ===
+          response.data[0].name.toLowerCase() ||
+        this.state.query.toLowerCase() ===
+          response.data[0].location.toLowerCase()
+      ) {
+        this.setState({
+          name: response.data[0].name,
+          location: response.data[0].location,
+          loading: false,
+        });
+      } else {
+        this.setState({ error: 'No Such NGO Found', loading: false });
+      }
     });
+    setTimeout(() => {
+      window.location.reload();
+    }, 3000);
   };
-
-  async componentDidMount() {
-    const response = await fetch('/ngo/data');
-    const data = await response.json();
-    this.setState({
-      name: data[0].name,
-      location: data[0].location,
-    });
-  }
 
   render() {
+    const { query, name, location, error, loading } = this.state;
     return (
       <>
-        <nav>
-          <h1 className="heading">Fundee</h1>
-        </nav>
-        <br />
         <div className="input">
-          <input
-            type="text"
-            value={this.state.search}
-            onChange={this.enteredValue}
-          />
-          <button onClick={this.searchValue}>Search</button>
+          <form onSubmit={this.submitHandler}>
+            <input
+              type="text"
+              name="query"
+              value={query}
+              placeholder="Search"
+              onChange={this.changeHandler}
+            />
+            <button type="submit" value="submit">
+              Search
+            </button>
+          </form>
           <br />
           <br />
-          {this.state.loading ? (
+          {loading ? (
             <div>Loading...</div>
-          ) : (
+          ) : error === '' ? (
             <div>
-              Name : {this.state.name}
-              <br />
-              Location : {this.state.location}
+              <div>
+                Name : {name}
+                <br />
+                Location : {location}
+              </div>
             </div>
+          ) : (
+            <div>{error}</div>
           )}
         </div>
       </>

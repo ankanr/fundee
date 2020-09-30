@@ -26,7 +26,6 @@ class LoginForm extends Component {
           this.setState({ message: 'Logged in!' });
           localStorage.setItem('token', response.data.token);
           localStorage.setItem('name', response.data.user.username);
-          window.location.reload();
         }
       })
       .catch((err) => console.log(err));
@@ -72,8 +71,6 @@ class LoginForm extends Component {
             </button>
           </form>
         </div>
-        {/* <h3>Your username is: {this.state.username}</h3>
-        <h3>Your password is: {this.state.password}</h3> */}
       </React.Fragment>
     );
   }

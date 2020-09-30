@@ -1,4 +1,5 @@
 import React from 'react';
+import SearchBox from './Search';
 
 class Home extends React.Component {
   render() {
@@ -8,6 +9,7 @@ class Home extends React.Component {
         {localStorage.getItem('name') !== null
           ? ` , ${localStorage.getItem('name')}`
           : `${''}`}
+        <SearchBox />
       </div>
     );
   }
