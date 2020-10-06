@@ -40,7 +40,7 @@ class SearchBox extends Component {
     });
     setTimeout(() => {
       window.location.reload();
-    }, 3000);
+    }, 2500);
   };
 
   render() {

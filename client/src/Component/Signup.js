@@ -17,17 +17,27 @@ class Signup extends Component {
     this.setState({ [e.target.name]: e.target.value });
   };
 
-  submitHandler = (e) => {
-    axios
-      .post('http://localhost:3000/user/register', this.state)
-      .then((response) => {
-        this.setState({ message: 'Signed Up!' });
-      })
-      .catch((err) => console.log(err));
-
-    setTimeout(() => {
-      window.location.reload();
-    }, 2500);
+  submitHandler = async (e) => {
+    e.preventDefault();
+    if (
+      this.state.username === '' ||
+      this.state.password === '' ||
+      this.state.email === '' ||
+      this.state.cno === ''
+    ) {
+      this.setState({ message: 'Please check the data entered!!' });
+    } else {
+      await axios
+        .post('http://localhost:3000/user/register', this.state)
+        .then((response) => {
+          console.log(response);
+          this.setState({ message: 'Signed Up!' });
+        })
+        .catch((err) => console.log(err));
+      setTimeout(() => {
+        window.location.reload();
+      }, 2500);
+    }
   };
 
   render() {

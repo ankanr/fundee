@@ -15,6 +15,10 @@ button {
     cursor: pointer;
 }
 
+.title {
+    font-size: 4rem;
+}
+
 .heading {
     font-family: 'Pacifico', cursive;
     color: #000;

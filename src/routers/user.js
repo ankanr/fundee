@@ -1,11 +1,11 @@
-const express = require("express");
-const User = require("../models/user");
+const express = require('express');
+const User = require('../models/user');
 const router = new express.Router();
-const auth = require("../middleware/auth.js");
+const auth = require('../middleware/auth.js');
 
-router.post("/register", async (req, res) => {
-  const user = new User(req.body);
+router.post('/register', async (req, res) => {
   try {
+    const user = new User(req.body);
     const token = user.generateAuthToken();
     res.send({ user, token });
   } catch (e) {
@@ -13,7 +13,7 @@ router.post("/register", async (req, res) => {
   }
 });
 
-router.post("/login", async (req, res) => {
+router.post('/login', async (req, res) => {
   try {
     const user = await User.findByCredentials(
       req.body.username,
@@ -27,11 +27,11 @@ router.post("/login", async (req, res) => {
   }
 });
 
-router.post("/logout", auth, async (req, res) => {
+router.post('/logout', auth, async (req, res) => {
   try {
-    req.user.token = "";
+    req.user.token = '';
     await req.user.save();
-    res.send("Logged Out!");
+    res.send('Logged Out!');
   } catch (e) {
     console.log(e);
     res.status(500).send(e);

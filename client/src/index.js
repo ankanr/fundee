@@ -7,6 +7,8 @@ import Signup from './Component/Signup';
 import Login from './Component/Login';
 import Logout from './Component/Logout';
 import Home from './Component/Home';
+import About from './Component/About';
+import Contact from './Component/Contact';
 
 class App extends React.Component {
   render() {
@@ -19,8 +21,12 @@ class App extends React.Component {
               <li>
                 <Link to="/">Home &nbsp;&nbsp;</Link>
               </li>
-              <li>About &nbsp;&nbsp;</li>
-              <li>Contact &nbsp;&nbsp;</li>
+              <li>
+                <Link to="/about">About &nbsp;&nbsp;</Link>
+              </li>
+              <li>
+                <Link to="/contact">Contact Us &nbsp;&nbsp;</Link>
+              </li>
               {localStorage.getItem('token') !== null ? (
                 <div>
                   <ul>
@@ -47,6 +53,12 @@ class App extends React.Component {
         <Switch>
           <Route exact path="/">
             <Home />
+          </Route>
+          <Route exact path="/about">
+            <About />
+          </Route>
+          <Route exact path="/contact">
+            <Contact />
           </Route>
           <Route exact path="/logout">
             <Logout />
