@@ -1,6 +1,5 @@
 import axios from 'axios';
 import React, { Component } from 'react';
-import './Search.css';
 
 class SearchBox extends Component {
   constructor(props) {
@@ -60,10 +59,8 @@ class SearchBox extends Component {
               Search
             </button>
           </form>
-          <br />
-          <br />
           {loading ? (
-            <div>Loading...</div>
+            <div></div>
           ) : error === '' ? (
             <div>
               <div>

@@ -52,4 +52,12 @@ router.post('/donate', auth, async (req, res) => {
   }
 });
 
+router.get('/profile', auth, async (req, res) => {
+  try {
+    res.send(req.user);
+  } catch (e) {
+    res.send(e);
+  }
+});
+
 module.exports = router;

@@ -9,6 +9,7 @@ import Logout from './Component/Logout';
 import Home from './Component/Home';
 import About from './Component/About';
 import Contact from './Component/Contact';
+import Profile from './Component/Profile';
 
 class App extends React.Component {
   render() {
@@ -30,6 +31,9 @@ class App extends React.Component {
               {localStorage.getItem('token') !== null ? (
                 <div>
                   <ul>
+                    <li>
+                      <Link to="/profile">Profile &nbsp;&nbsp;</Link>
+                    </li>
                     <li>
                       <Link to="/logout">Logout &nbsp;&nbsp;</Link>
                     </li>
@@ -68,6 +72,9 @@ class App extends React.Component {
           </Route>
           <Route exact path="/signup">
             <Signup />
+          </Route>
+          <Route exact path="/profile">
+            <Profile />
           </Route>
         </Switch>
       </Router>

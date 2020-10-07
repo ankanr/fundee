@@ -15,6 +15,8 @@ class Home extends React.Component {
             ? ` , ${localStorage.getItem('name')}`
             : `${''}`}
           <SearchBox />
+          <br />
+          <br />
           {localStorage.getItem('token') !== null ? <Donation /> : <div></div>}
         </div>
       </div>

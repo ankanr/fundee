@@ -47,7 +47,7 @@ class Donation extends React.Component {
           />
           <button type="submit">Donate</button>
         </form>
-        <div className="res">{message}</div>
+        {message !== '' ? <div className="res">{message}</div> : <div></div>}
       </div>
     );
   }
