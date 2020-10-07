@@ -38,4 +38,18 @@ router.post('/logout', auth, async (req, res) => {
   }
 });
 
+router.post('/donate', auth, async (req, res) => {
+  try {
+    const donation = parseInt(req.body.donation);
+    req.user.donations = req.user.donations.concat({
+      donation,
+    });
+    await req.user.save();
+    res.send('Thank You for your donation');
+  } catch (e) {
+    console.log(e);
+    res.send(e);
+  }
+});
+
 module.exports = router;

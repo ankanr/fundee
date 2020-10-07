@@ -1,5 +1,6 @@
 import React from 'react';
 import SearchBox from './Search';
+import Donation from './Donation';
 
 class Home extends React.Component {
   render() {
@@ -14,6 +15,7 @@ class Home extends React.Component {
             ? ` , ${localStorage.getItem('name')}`
             : `${''}`}
           <SearchBox />
+          {localStorage.getItem('token') !== null ? <Donation /> : <div></div>}
         </div>
       </div>
     );
