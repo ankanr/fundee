@@ -1,12 +1,13 @@
 import axios from 'axios';
 import React, { Component } from 'react';
+import CharityCard from './CharityCard';
 
 class SearchBox extends Component {
   constructor(props) {
     super(props);
     this.state = {
       loading: true,
-      name: '',
+      ngo: [],
       location: '',
       query: '',
       error: '',
@@ -22,28 +23,31 @@ class SearchBox extends Component {
   submitHandler = async (e) => {
     e.preventDefault();
     await axios.get('http://localhost:3000/ngo/data').then((response) => {
+      this.setState({
+        ngo: response.data,
+        loading: false,
+        location: this.state.query,
+      });
+    });
+    let c = 0;
+    this.state.ngo.forEach((ngo) => {
       if (
-        this.state.query.toLowerCase() ===
-          response.data[0].name.toLowerCase() ||
-        this.state.query.toLowerCase() ===
-          response.data[0].location.toLowerCase()
+        ngo.location.toLowerCase().includes(this.state.location.toLowerCase())
       ) {
-        this.setState({
-          name: response.data[0].name,
-          location: response.data[0].location,
-          loading: false,
-        });
-      } else {
-        this.setState({ error: 'No Such NGO Found', loading: false });
+        c = c + 1;
+        console.log(c);
       }
     });
-    setTimeout(() => {
-      window.location.reload();
-    }, 2500);
+    if (c === 0 || this.state.location === '') {
+      this.setState({ error: 'No Such NGO Found' });
+      setTimeout(() => {
+        window.location.reload();
+      }, 2500);
+    }
   };
 
   render() {
-    const { query, name, location, error, loading } = this.state;
+    const { query, ngo, error, location, loading } = this.state;
     return (
       <>
         <div className="input">
@@ -61,13 +65,19 @@ class SearchBox extends Component {
           </form>
           {loading ? (
             <div></div>
-          ) : error === '' ? (
-            <div>
-              <div>
-                Name : {name}
-                <br />
-                Location : {location}
-              </div>
+          ) : (error === '') & (loading === false) ? (
+            <div className="card">
+              {ngo
+                .filter((ngo) =>
+                  ngo.location.toLowerCase().includes(location.toLowerCase())
+                )
+                .map((ngo) => (
+                  <CharityCard
+                    name={ngo.name}
+                    location={ngo.location}
+                    key={ngo._id}
+                  />
+                ))}
             </div>
           ) : (
             <div>{error}</div>

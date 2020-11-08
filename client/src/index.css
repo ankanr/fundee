@@ -1,64 +1,64 @@
 * {
-	margin: 0;
-	padding: 0;
-	box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
 }
 
 body {
-	background-color: #4932AE;
+  background-color: #4932ae;
 }
 
 .heading {
-	font-family: 'Pacifico', cursive;
-    color: #000;
-    background-color: #FFD100;
-    text-align: left;
-    padding: 5px;
-    font-size: 2rem;
-    text-shadow: 1px 1px #333;
+  font-family: 'Pacifico', cursive;
+  color: #000;
+  background-color: #ffd100;
+  text-align: left;
+  padding: 5px;
+  font-size: 2rem;
+  text-shadow: 1px 1px #333;
 }
 
 .title {
-    font-family: 'Pacifico', cursive;
-    text-align: center;
-    font-size: 4rem;
-    color: #fff;
+  font-family: 'Pacifico', cursive;
+  text-align: center;
+  font-size: 4rem;
+  color: #fff;
 }
 
-.form{
-	display: block;
-	text-align: center;
-	position: absolute;	
-	top: 50%;
-  	left: 50%;
-  	transform: translate(-50%, -50%);
-	background-color:  #1f1d25;
-	color: #fff;
-	padding: 2rem;
-	border-radius: 20px;
-	font-weight: bold;
+.form {
+  display: block;
+  text-align: center;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: #1f1d25;
+  color: #fff;
+  padding: 2rem;
+  border-radius: 20px;
+  font-weight: bold;
 }
 
 .form form {
-	position: relative;
-	display: inline-block;
-    margin: 0 auto;
+  position: relative;
+  display: inline-block;
+  margin: 0 auto;
 }
 
 nav {
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
 }
 
 ul {
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
 }
 
 ul li {
-    list-style: none;
+  list-style: none;
 }
 
 a {
@@ -68,40 +68,38 @@ a {
 
 label {
   display: inline-block;
-  width:100px;
+  width: 100px;
   text-align: left;
 }
 
 input {
-	padding: 0.5rem 1rem;
-	border-radius: 5px;
+  padding: 0.5rem 1rem;
+  border-radius: 5px;
 }
 
 button {
-	padding: 0.5rem 1.5rem;
-	border-radius: 10px;
-	cursor: pointer;
-	font-size: 15px;
-	font-weight: bold;
+  padding: 0.5rem 1.5rem;
+  border-radius: 10px;
+  cursor: pointer;
+  font-size: 15px;
+  font-weight: bold;
 }
-
 
 /* Signup */
-.submit{
-	background-color: #709094;
-	margin-left: 100px;
+.submit {
+  background-color: #709094;
+  margin-left: 100px;
 }
-
 
 /* Login and Logout */
 .res {
   text-align: center;
   color: #000;
-	background: #fff;
-	padding: 0.5rem;
-	font-family: 'Pacifico', cursive;
-	font-weight: bold;
-	letter-spacing: 3px;
+  background: #fff;
+  padding: 0.5rem;
+  font-family: 'Pacifico', cursive;
+  font-weight: bold;
+  letter-spacing: 3px;
 }
 
 /* About */
@@ -166,4 +164,22 @@ footer p {
 .profile-main .donation {
   display: flex;
   flex-direction: row;
+}
+
+/* Charity Card */
+.avi {
+  padding: 1rem;
+  margin: 1rem;
+  background-color: #ffd100;
+  max-width: 850px;
+  text-align: left;
+  font-size: 2rem;
+  font-family: Arial, Helvetica, sans-serif;
+  color: #1f1d25;
+}
+
+.card {
+  margin: 0 auto;
+  left: 30%;
+  position: absolute;
 }
